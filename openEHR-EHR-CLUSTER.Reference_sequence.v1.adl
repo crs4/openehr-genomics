@@ -1,0 +1,103 @@
+archetype (adl_version=1.4)
+    openEHR-EHR-CLUSTER.Reference_sequence.v1
+
+concept
+    [at0018]
+
+language
+    original_language = <[ISO_639-1::en]>
+
+description
+    original_author = <
+        ["date"] = <"2017-02-08">
+        ["name"] = <"Cecilia Mascia">
+        ["organisation"] = <"CRS4, Italy">
+        ["email"] = <"cecilia.mascia@crs4.it">
+    >
+    lifecycle_state = <"Draft">
+    other_contributors = <"Paolo Uva, CRS4, Italy","Gianluigi Zanetti, CRS4, Italy">
+    details = <
+        ["en"] = <
+            language = <[ISO_639-1::en]>
+            purpose = <"To record data, annotations and interpretation about a genetic test performed">
+            keywords = <"genetic findings","reference sequence","Genetic test","variant caling","genomic","variation">
+        >
+    >
+
+definition
+    CLUSTER[at0018] occurrences matches {1..*} matches {  -- Reference sequence
+        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+            ELEMENT[at0019] occurrences matches {1..1} matches {  -- Source name
+                value existence matches {0..1} matches {
+                    DV_TEXT[at0024] occurrences matches {1..1} matches {  -- DV_TEXT
+                        value existence matches {1..1} matches {/.*/}
+                    }
+                }
+            }
+            ELEMENT[at0020] occurrences matches {1..1} matches {  -- Accession number
+                value existence matches {0..1} matches {
+                    DV_TEXT[at0023] occurrences matches {1..1} matches {  -- DV_TEXT
+                        value existence matches {1..1} matches {/.*/}
+                    }
+                }
+            }
+            ELEMENT[at0021] occurrences matches {0..*} matches {  -- Version number
+                value existence matches {0..1} matches {
+                    DV_TEXT[at0026] occurrences matches {1..1} matches {  -- DV_TEXT
+                        value existence matches {1..1} matches {/.*/}
+                    }
+                }
+            }
+            ELEMENT[at0022] occurrences matches {1..1} matches {  -- URL
+                value existence matches {0..1} matches {
+                    DV_TEXT[at0025] occurrences matches {1..1} matches {  -- DV_TEXT
+                        value existence matches {1..1} matches {/.*/}
+                    }
+                }
+            }
+        }
+    }
+
+ontology
+    term_definitions = <
+        ["en"] = <
+            items = <
+                ["at0018"] = <
+                    text = <"Reference sequence">
+                    description = <"A sequence file that is used as a reference to describe variants that are present in a analysed sequence">
+                >
+                ["at0019"] = <
+                    text = <"Source name">
+                    description = <"The name of the data source containing the reference sequence">
+                >
+                ["at0020"] = <
+                    text = <"Accession number">
+                    description = <"A unique identifier to refer to a sequence record in a sequence repository">
+                >
+                ["at0021"] = <
+                    text = <"Version number">
+                    description = <"An attribute that provides a specific indication of the sequence used for annotation">
+                >
+                ["at0022"] = <
+                    text = <"URL">
+                    description = <"Network address">
+                >
+                ["at0023"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0024"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0025"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0026"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+            >
+        >
+    >

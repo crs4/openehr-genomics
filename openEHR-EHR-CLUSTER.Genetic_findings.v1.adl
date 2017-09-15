@@ -1,0 +1,321 @@
+archetype (adl_version=1.4)
+    openEHR-EHR-CLUSTER.Genetic_findings.v1
+
+concept
+    [at0000]
+
+language
+    original_language = <[ISO_639-1::en]>
+
+description
+    original_author = <
+        ["date"] = <"2017-02-08">
+        ["name"] = <"Cecilia Mascia">
+        ["organisation"] = <"CRS4, Italy">
+        ["email"] = <"cecilia.mascia@crs4.it">
+    >
+    lifecycle_state = <"Draft">
+    other_contributors = <"Paolo Uva, CRS4, Italy","Gianluigi Zanetti, CRS4, Italy">
+    details = <
+        ["en"] = <
+            language = <[ISO_639-1::en]>
+            purpose = <"To record the results of a genetic test, including sequence variations data and annotations.">
+            keywords = <"laboratory","genomic","variant","cariation","findings","result","variant calling","annotations","transcript","protein">
+            use = <"To be used inside the 'Test findings' SLOT of the 'OBSERVATION.laboratory_test_result' archetype">
+            other_details = <
+                ["References"] = <"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569">
+            >
+        >
+    >
+
+definition
+    CLUSTER[at0000] occurrences matches {1..1} matches {  -- Genetic findings
+        items existence matches {0..1} cardinality matches {0..*; ordered} matches {
+            CLUSTER[at0002] occurrences matches {1..*} matches {  -- Finding
+                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+                    allow_archetype CLUSTER[at0003] occurrences matches {1..1} matches {  -- Sequence variation
+                        include
+                            archetype_id/value matches {/.*/}
+                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.Sequence_variation(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+                    }
+                    CLUSTER[at0004] occurrences matches {1..1} matches {  -- Annotations
+                        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+                            CLUSTER[at0013] occurrences matches {0..*} matches {  -- Transcript annotation
+                                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+                                    allow_archetype CLUSTER[at0018] occurrences matches {1..1} matches {  -- Reference sequence
+                                        include
+                                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.Reference_sequence\.v1/}
+                                    }
+                                    ELEMENT[at0027] occurrences matches {0..1} matches {  -- Feature
+                                        value existence matches {0..1} matches {
+                                            DV_TEXT[at0006] occurrences matches {1..1} matches {  -- DV_TEXT
+                                                value existence matches {1..1} matches {/.*/}
+                                            }
+                                        }
+                                    }
+                                    ELEMENT[at0028] occurrences matches {0..1} matches {  -- DNA position
+                                        value existence matches {0..1} matches {
+                                            DV_TEXT[at0017] occurrences matches {1..1} matches {  -- DV_TEXT
+                                                value existence matches {1..1} matches {/.*/}
+                                            }
+                                        }
+                                    }
+                                    ELEMENT[at0029] occurrences matches {0..1} matches {  -- Protein position
+                                        value existence matches {0..1} matches {
+                                            DV_TEXT[at0030] occurrences matches {1..1} matches {  -- DV_TEXT
+                                                value existence matches {1..1} matches {/.*/}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            CLUSTER[at0005] occurrences matches {0..1} matches {  -- Predict impact
+                                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+                                    allow_archetype CLUSTER[at0007] occurrences matches {1..1} matches {  -- Bioinformatic calculation tool
+                                        include
+                                            archetype_id/value matches {/.*/}
+                                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+                                    }
+                                    ELEMENT[at0009] occurrences matches {1..1} matches {  -- Score
+                                        value existence matches {0..1} matches {
+                                            DV_COUNT[at0020] occurrences matches {1..1} matches {  -- DV_COUNT
+                                                magnitude existence matches {1..1} matches {*}
+                                            }
+                                        }
+                                    }
+                                    ELEMENT[at0010] occurrences matches {1..1} matches {  -- Qualitative prediction
+                                        value existence matches {0..1} matches {
+                                            DV_TEXT[at0011] occurrences matches {1..1} matches {  -- DV_TEXT
+                                                value existence matches {1..1} matches {/.*/}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            CLUSTER[at0012] occurrences matches {0..1} matches {  -- Conservation
+                                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+                                    allow_archetype CLUSTER[at0014] occurrences matches {1..1} matches {  -- Bioinformatic calculation tool
+                                        include
+                                            archetype_id/value matches {/.*/}
+                                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+                                    }
+                                    ELEMENT[at0015] occurrences matches {1..1} matches {  -- Score
+                                        value existence matches {0..1} matches {
+                                            DV_COUNT[at0016] occurrences matches {1..1} matches {  -- DV_COUNT
+                                                magnitude existence matches {1..1} matches {*}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            CLUSTER[at0031] occurrences matches {0..*} matches {  -- Allele frequency
+                                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+                                    allow_archetype CLUSTER[at0037] occurrences matches {0..*} matches {  -- Bioinformatic calculation tool
+                                        include
+                                            archetype_id/value matches {/.*/}
+                                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+                                    }
+                                    ELEMENT[at0033] occurrences matches {0..*} matches {  -- Score
+                                        value existence matches {0..1} matches {
+                                            DV_COUNT[at0036] occurrences matches {1..1} matches {  -- DV_COUNT
+                                                magnitude existence matches {1..1} matches {*}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            CLUSTER[at0038] occurrences matches {0..*} matches {  -- Info
+                                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
+                                    ELEMENT[at0039] occurrences matches {1..1} matches {  -- ID
+                                        value existence matches {0..1} matches {
+                                            DV_TEXT[at0040] occurrences matches {1..1} matches {  -- DV_TEXT
+                                                value existence matches {1..1} matches {/.*/}
+                                            }
+                                        }
+                                    }
+                                    ELEMENT[at0041] occurrences matches {1..1} matches {  -- Description
+                                        value existence matches {0..1} matches {
+                                            DV_TEXT[at0043] occurrences matches {1..1} matches {  -- DV_TEXT
+                                                value existence matches {1..1} matches {/.*/}
+                                            }
+                                        }
+                                    }
+                                    ELEMENT[at0042] occurrences matches {1..1} matches {  -- Value
+                                        value existence matches {0..1} matches {
+                                            DV_TEXT[at0044] occurrences matches {1..1} matches {  -- DV_TEXT
+                                                value existence matches {1..1} matches {/.*/}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            allow_archetype CLUSTER[at0001] occurrences matches {0..*} matches {  -- Extension
+                                include
+                                    archetype_id/value matches {/.*/}
+                            }
+                        }
+                    }
+                }
+            }
+            ELEMENT[at0032] occurrences matches {0..*} matches {  -- Comment
+                value existence matches {0..1} matches {
+                    DV_TEXT[at0034] occurrences matches {1..1} matches {  -- DV_TEXT
+                        value existence matches {1..1} matches {/.*/}
+                    }
+                }
+            }
+        }
+    }
+
+ontology
+    term_definitions = <
+        ["en"] = <
+            items = <
+                ["at0000"] = <
+                    text = <"Genetic findings">
+                    description = <"Findings of a genetic test">
+                >
+                ["at0002"] = <
+                    text = <"Finding">
+                    description = <"A single variation founded  toghether with the related annotations.">
+                >
+                ["at0003"] = <
+                    text = <"Sequence variation">
+                    description = <"Record of the VCF data about a single variation detected in a specifc genome position">
+                >
+                ["at0004"] = <
+                    text = <"Annotations">
+                    description = <"Annotations made upon the data through bioinformatic analysis tools">
+                >
+                ["at0005"] = <
+                    text = <"Predict impact">
+                    description = <"Estimate of the effects that each allele of the variant may have on the transcript.">
+                >
+                ["at0007"] = <
+                    text = <"Bioinformatic calculation tool">
+                    description = <"The tool used to calculate the predict impact">
+                >
+                ["at0010"] = <
+                    text = <"Qualitative prediction">
+                    description = <"A textual explaination of the obtained score">
+                >
+                ["at0011"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0012"] = <
+                    text = <"Conservation">
+                    description = <"">
+                >
+                ["at0014"] = <
+                    text = <"Bioinformatic calculation tool">
+                    description = <"The tool used to calculate the conservation score">
+                >
+                ["at0015"] = <
+                    text = <"Score">
+                    description = <"The value">
+                >
+                ["at0016"] = <
+                    text = <"DV_COUNT">
+                    description = <"">
+                >
+                ["at0032"] = <
+                    text = <"Comment">
+                    description = <"Supplementary comment to the results">
+                >
+                ["at0034"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0001"] = <
+                    text = <"Extension">
+                    description = <"Details about additional annotation">
+                >
+                ["at0013"] = <
+                    text = <"Transcript annotation">
+                    description = <"Variant description at the transcript level">
+                >
+                ["at0018"] = <
+                    text = <"Reference sequence">
+                    description = <"A sequence file that is used as a reference to describe variants discovered">
+                >
+                ["at0027"] = <
+                    text = <"Feature">
+                    description = <"Functional consequence of the variation">
+                >
+                ["at0028"] = <
+                    text = <"DNA position">
+                    description = <"Description of the variation at the  DNA-level following the HGVS nomenclature v15.11">
+                >
+                ["at0029"] = <
+                    text = <"Protein position">
+                    description = <"Description of the variation at the  protein-level following the HGVS nomenclature v15.11">
+                >
+                ["at0006"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0017"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0030"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0031"] = <
+                    text = <"Allele frequency">
+                    description = <"The relative frequency of an allele at a particular locus in a population.">
+                >
+                ["at0033"] = <
+                    text = <"Score">
+                    description = <"">
+                >
+                ["at0036"] = <
+                    text = <"DV_COUNT">
+                    description = <"">
+                >
+                ["at0037"] = <
+                    text = <"Bioinformatic calculation tool">
+                    description = <"">
+                >
+                ["at0038"] = <
+                    text = <"Info">
+                    description = <"">
+                >
+                ["at0039"] = <
+                    text = <"ID">
+                    description = <"The ID of the info field in the variant calling format">
+                    comment = <"VCF INFO field: ID">
+                >
+                ["at0040"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0041"] = <
+                    text = <"Description">
+                    description = <"Description of the specif info">
+                >
+                ["at0042"] = <
+                    text = <"Value">
+                    description = <"The value of the reported info">
+                >
+                ["at0043"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0044"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0009"] = <
+                    text = <"Score">
+                    description = <"The calculated value">
+                >
+                ["at0020"] = <
+                    text = <"DV_COUNT">
+                    description = <"">
+                >
+            >
+        >
+    >
