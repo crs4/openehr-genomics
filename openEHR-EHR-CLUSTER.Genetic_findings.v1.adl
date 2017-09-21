@@ -23,7 +23,7 @@ description
             keywords = <"laboratory","genomic","variant","cariation","findings","result","variant calling","annotations","transcript","protein">
             use = <"To be used inside the 'Test findings' SLOT of the 'OBSERVATION.laboratory_test_result' archetype">
             other_details = <
-                ["References"] = <"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569">
+                ["References"] = <"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 Rehm, H. L., Bale, S. J., Bayrak-Toydemir, P., Berg, J. S., Brown, K. K., Deignan, J. L., … Lyon, E. (2013). ACMG clinical laboratory standards for next-generation sequencing. Genetics in Medicine : Official Journal of the American College of Medical Genetics, 15(9), 733–47. https://doi.org/10.1038/gim.2013.92">
             >
         >
     >
@@ -35,8 +35,8 @@ definition
                 items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
                     allow_archetype CLUSTER[at0003] occurrences matches {1..1} matches {  -- Sequence variation
                         include
-                            archetype_id/value matches {/.*/}
                             archetype_id/value matches {/openEHR-EHR-CLUSTER\.Sequence_variation(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+                            archetype_id/value matches {/.*/}
                     }
                     CLUSTER[at0004] occurrences matches {1..1} matches {  -- Annotations
                         items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
@@ -73,8 +73,8 @@ definition
                                 items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
                                     allow_archetype CLUSTER[at0007] occurrences matches {1..1} matches {  -- Bioinformatic calculation tool
                                         include
-                                            archetype_id/value matches {/.*/}
                                             archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+                                            archetype_id/value matches {/.*/}
                                     }
                                     ELEMENT[at0009] occurrences matches {1..1} matches {  -- Score
                                         value existence matches {0..1} matches {
@@ -112,8 +112,8 @@ definition
                                 items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
                                     allow_archetype CLUSTER[at0037] occurrences matches {0..*} matches {  -- Bioinformatic calculation tool
                                         include
-                                            archetype_id/value matches {/.*/}
                                             archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+                                            archetype_id/value matches {/.*/}
                                     }
                                     ELEMENT[at0033] occurrences matches {0..*} matches {  -- Score
                                         value existence matches {0..1} matches {
@@ -152,6 +152,28 @@ definition
                             allow_archetype CLUSTER[at0001] occurrences matches {0..*} matches {  -- Extension
                                 include
                                     archetype_id/value matches {/.*/}
+                            }
+                        }
+                    }
+                    ELEMENT[at0008] occurrences matches {0..*} matches {  -- Variant interpretation
+                        value existence matches {0..1} matches {
+                            DV_TEXT[at0019] occurrences matches {0..1} matches {  -- DV_TEXT
+                                value existence matches {1..1} matches {/.*/}
+                            }
+                        }
+                    }
+                    ELEMENT[at0021] occurrences matches {0..*} matches {  -- Variant classification
+                        value existence matches {0..1} matches {
+                            DV_CODED_TEXT[at0022] occurrences matches {0..1} matches {  -- DV_CODED_TEXT
+                                value existence matches {1..1} matches {/.*/}
+                                defining_code existence matches {1..1} matches {
+                                    [local::
+                                    at0023,
+                                    at0024,
+                                    at0025,
+                                    at0026,
+                                    at0035]
+                                }
                             }
                         }
                     }
@@ -315,6 +337,42 @@ ontology
                 ["at0020"] = <
                     text = <"DV_COUNT">
                     description = <"">
+                >
+                ["at0008"] = <
+                    text = <"Variant interpretation">
+                    description = <"Interpretative data about the specific variant">
+                >
+                ["at0019"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
+                >
+                ["at0021"] = <
+                    text = <"Variant classification">
+                    description = <"Clinical classification according to the ACMG guidelines.">
+                >
+                ["at0022"] = <
+                    text = <"DV_CODED_TEXT">
+                    description = <"">
+                >
+                ["at0023"] = <
+                    text = <"pathogenic">
+                    description = <" ">
+                >
+                ["at0024"] = <
+                    text = <"likely pathogenic">
+                    description = <" ">
+                >
+                ["at0025"] = <
+                    text = <"uncertain significance">
+                    description = <" ">
+                >
+                ["at0026"] = <
+                    text = <"likely benign">
+                    description = <" ">
+                >
+                ["at0035"] = <
+                    text = <"benign">
+                    description = <" ">
                 >
             >
         >
