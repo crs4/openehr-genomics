@@ -207,9 +207,14 @@ definition
                     }
                     CLUSTER[at0.5] occurrences matches {0..1} matches {  -- Bioinformatic analysis
                         items existence matches {1..1} cardinality matches {1..*; ordered} matches {
-                            ELEMENT[at0.12] occurrences matches {0..1} matches {  -- Pipeline
+                            ELEMENT[at0.12] occurrences matches {0..1} matches {  -- Workflow ID
                                 value existence matches {0..1} matches {
                                     DV_TEXT[at0.23] occurrences matches {0..1} matches {*}  -- 
+                                }
+                            }
+                            ELEMENT[at0.14] occurrences matches {0..1} matches {  -- URL
+                                value existence matches {0..1} matches {
+                                    DV_URI[at0.21] occurrences matches {0..1} matches {*}  -- 
                                 }
                             }
                             ELEMENT[at0.13] occurrences matches {0..1} matches {  -- Version
@@ -217,9 +222,11 @@ definition
                                     DV_TEXT[at0.19] occurrences matches {0..1} matches {*}  -- 
                                 }
                             }
-                            ELEMENT[at0.14] occurrences matches {0..1} matches {  -- URL
+                            ELEMENT[at0.43] occurrences matches {0..*} matches {  -- Description
                                 value existence matches {0..1} matches {
-                                    DV_URI[at0.21] occurrences matches {0..1} matches {*}  -- 
+                                    DV_TEXT[at0.44] occurrences matches {0..1} matches {  -- DV_TEXT
+                                        value existence matches {1..1} matches {/.*/}
+                                    }
                                 }
                             }
                         }
@@ -252,12 +259,12 @@ ontology
                     description = <"*">
                 >
                 ["at0.12"] = <
-                    text = <"Pipeline">
-                    description = <"Bioinformatic computational analysis">
+                    text = <"Workflow ID">
+                    description = <"The ID of the workflow that generated the bioinformatic analysis results">
                 >
                 ["at0.13"] = <
                     text = <"Version">
-                    description = <"Version of the pipeline used">
+                    description = <"Version of the workflow">
                 >
                 ["at0.14"] = <
                     text = <"URL">
@@ -473,6 +480,14 @@ to classify variants">
                 ["at0120"] = <
                     text = <"Preliminary">
                     description = <"Verified early results are available, but not all results are final. This is a sub-category of 'Partial'.">
+                >
+                ["at0.43"] = <
+                    text = <"Description">
+                    description = <"Summary about the workflow">
+                >
+                ["at0.44"] = <
+                    text = <"DV_TEXT">
+                    description = <"">
                 >
             >
         >
