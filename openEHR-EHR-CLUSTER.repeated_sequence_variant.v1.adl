@@ -1,106 +1,84 @@
 archetype (adl_version=1.4)
-    openEHR-EHR-CLUSTER.repeated_sequence_variant.v1
+	openEHR-EHR-CLUSTER.repeated_sequence_variant.v1
 
 concept
-    [at0000]
-
+	[at0000]	-- Repeated sequence variant
 language
-    original_language = <[ISO_639-1::en]>
-
+	original_language = <[ISO_639-1::en]>
 description
-    original_author = <
-        ["date"] = <"2017-02-24">
-        ["name"] = <"Cecilia Mascia">
-        ["organisation"] = <"CRS4, Italy">
-        ["email"] = <"cecilia.mascia@crs4.it">
-    >
-    lifecycle_state = <"Draft">
-    other_contributors = <"Paolo Uva, CRS4, Italy","Gianluigi Zanetti, CRS4, Italy">
-    details = <
-        ["en"] = <
-            language = <[ISO_639-1::en]>
-            purpose = <"To describe a repeated sequence variant observed in a sequence according to the HGVS nomenclature">
-            keywords = <"repeated sequence","variation","genetic","genomic","variant">
-            other_details = <
-                ["Reference"] = <"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 ">
-            >
-        >
-    >
+	original_author = <
+		["name"] = <"Cecilia Mascia">
+		["email"] = <"cecilia.mascia@crs4.it">
+		["organisation"] = <"CRS4, Italy">
+		["date"] = <"2017-02-24">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To describe a repeated sequence variant observed in a sequence according to the HGVS nomenclature">
+			use = <"">
+			keywords = <"repeated sequence", "variation", "genetic", "genomic", "variant">
+			misuse = <"">
+			copyright = <"">
+		>
+	>
+	lifecycle_state = <"NotSet">
+	other_contributors = <"Paolo Uva, CRS4, Italy", "Gianluigi Zanetti, CRS4, Italy", "Simone Leo, CRS4, Italy">
+	other_details = <
+		["references"] = <"\"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 \"">
+		["MD5-CAM-1.0.1"] = <"E3BA124C3BF6D2E60394975BB7559711">
+	>
 
 definition
-    CLUSTER[at0000] occurrences matches {1..1} matches {  -- Repeated sequence variant
-        items existence matches {0..1} cardinality matches {0..*; ordered} matches {
-            ELEMENT[at0001] occurrences matches {1..1} matches {  -- Start position
-                value existence matches {0..1} matches {
-                    DV_COUNT[at0002] occurrences matches {1..1} matches {  -- DV_COUNT
-                        magnitude existence matches {1..1} matches {*}
-                    }
-                }
-            }
-            ELEMENT[at0003] occurrences matches {0..1} matches {  -- End position
-                value existence matches {0..1} matches {
-                    DV_COUNT[at0004] occurrences matches {1..1} matches {  -- DV_COUNT
-                        magnitude existence matches {1..1} matches {*}
-                    }
-                }
-            }
-            ELEMENT[at0005] occurrences matches {0..1} matches {  -- Repeated sequence
-                value existence matches {0..1} matches {
-                    DV_TEXT[at0006] occurrences matches {1..1} matches {  -- DV_TEXT
-                        value existence matches {1..1} matches {/.*/}
-                    }
-                }
-            }
-            ELEMENT[at0007] occurrences matches {1..1} matches {  -- Copy number
-                value existence matches {0..1} matches {
-                    DV_COUNT[at0008] occurrences matches {1..1} matches {  -- DV_COUNT
-                        magnitude existence matches {1..1} matches {*}
-                    }
-                }
-            }
-        }
-    }
+	CLUSTER[at0000] matches {	-- Repeated sequence variant
+		items cardinality matches {2..*; ordered} matches {
+			ELEMENT[at0001] matches {	-- Start position
+				value matches {
+					DV_COUNT matches {*}
+				}
+			}
+			ELEMENT[at0003] occurrences matches {0..1} matches {	-- End position
+				value matches {
+					DV_COUNT matches {*}
+				}
+			}
+			ELEMENT[at0005] occurrences matches {0..1} matches {	-- Repeated sequence
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0007] matches {	-- Copy number
+				value matches {
+					DV_COUNT matches {*}
+				}
+			}
+		}
+	}
 
 ontology
-    term_definitions = <
-        ["en"] = <
-            items = <
-                ["at0000"] = <
-                    text = <"Repeated sequence variant">
-                    description = <"A sequence where, compared to a reference sequence, a segment of one or more nucleotides (the repeat unit) is present several times, one after the other.">
-                >
-                ["at0001"] = <
-                    text = <"Start position">
-                    description = <"Position of the first nucleotide of the repeated range">
-                >
-                ["at0002"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0003"] = <
-                    text = <"End position">
-                    description = <"Position of the last nucleotide of the repeated range">
-                >
-                ["at0004"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0005"] = <
-                    text = <"Repeated sequence">
-                    description = <"The sequence of nucleotides that has been repeated">
-                >
-                ["at0006"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0007"] = <
-                    text = <"Copy number">
-                    description = <"Number of repeat units">
-                >
-                ["at0008"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-            >
-        >
-    >
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Repeated sequence variant">
+					description = <"A sequence where, compared to a reference sequence, a segment of one or more nucleotides (the repeat unit) is present several times, one after the other.">
+				>
+				["at0001"] = <
+					text = <"Start position">
+					description = <"Position of the first nucleotide of the repeated range">
+				>
+				["at0003"] = <
+					text = <"End position">
+					description = <"Position of the last nucleotide of the repeated range">
+				>
+				["at0005"] = <
+					text = <"Repeated sequence">
+					description = <"The sequence of nucleotides that has been repeated">
+				>
+				["at0007"] = <
+					text = <"Copy number">
+					description = <"Number of repeat units">
+				>
+			>
+		>
+	>

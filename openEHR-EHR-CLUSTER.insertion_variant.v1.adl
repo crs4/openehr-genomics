@@ -1,92 +1,76 @@
 archetype (adl_version=1.4)
-    openEHR-EHR-CLUSTER.insertion_variant.v1
+	openEHR-EHR-CLUSTER.insertion_variant.v1
 
 concept
-    [at0000]
-
+	[at0000]	-- Insertion variant
 language
-    original_language = <[ISO_639-1::en]>
-
+	original_language = <[ISO_639-1::en]>
 description
-    original_author = <
-        ["date"] = <"2017-02-23">
-        ["name"] = <"Cecilia Mascia">
-        ["organisation"] = <"CSR4, Italy">
-        ["email"] = <"cmascia@crs4.it">
-    >
-    lifecycle_state = <"Draft">
-    other_contributors = <"Paolo Uva, CSR4, Italy","Gianluigi Zanetti, CSR4, Italy">
-    details = <
-        ["en"] = <
-            language = <[ISO_639-1::en]>
-            purpose = <"To describe an insertion variant observed in a sequence according to the HGVS nomenclature.">
-            keywords = <"insertion","variation","genetic","genomic","variant">
-            other_details = <
-                ["Reference"] = <"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 ">
-            >
-        >
-    >
+	original_author = <
+		["name"] = <"Cecilia Mascia">
+		["organisation"] = <"CSR4, Italy">
+		["email"] = <"cmascia@crs4.it">
+		["date"] = <"2017-02-23">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To describe an insertion variant observed in a sequence according to the HGVS nomenclature.">
+			use = <"">
+			keywords = <"insertion", "variation", "genetic", "genomic", "variant">
+			misuse = <"">
+			copyright = <"">
+		>
+	>
+	lifecycle_state = <"NotSet">
+	other_contributors = <"Paolo Uva, CSR4, Italy", "Gianluigi Zanetti, CSR4, Italy", "Simone Leo, CRS4, Italy">
+	other_details = <
+		["references"] = <"\"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 \"">
+		["MD5-CAM-1.0.1"] = <"ECBE175B30648070C3F1E839DF73B5C4">
+	>
 
 definition
-    CLUSTER[at0000] occurrences matches {1..1} matches {  -- Insertion variant
-        items existence matches {0..1} cardinality matches {0..*; ordered} matches {
-            ELEMENT[at0001] occurrences matches {1..1} matches {  -- Start position
-                value existence matches {0..1} matches {
-                    DV_COUNT[at0002] occurrences matches {1..1} matches {  -- DV_COUNT
-                        magnitude existence matches {1..1} matches {*}
-                    }
-                }
-            }
-            ELEMENT[at0003] occurrences matches {1..1} matches {  -- End position
-                value existence matches {0..1} matches {
-                    DV_COUNT[at0005] occurrences matches {1..1} matches {  -- DV_COUNT
-                        magnitude existence matches {1..1} matches {*}
-                    }
-                }
-            }
-            ELEMENT[at0006] occurrences matches {1..1} matches {  -- Inserted nucleotide(s)
-                value existence matches {0..1} matches {
-                    DV_TEXT[at0007] occurrences matches {1..1} matches {  -- DV_TEXT
-                        value existence matches {1..1} matches {/.*/}
-                    }
-                }
-            }
-        }
-    }
+	CLUSTER[at0000] matches {	-- Insertion variant
+		items cardinality matches {3..*; ordered} matches {
+			ELEMENT[at0001] matches {	-- Start position
+				value matches {
+					DV_COUNT matches {*}
+				}
+			}
+			ELEMENT[at0003] matches {	-- End position
+				value matches {
+					DV_COUNT matches {*}
+				}
+			}
+			ELEMENT[at0006] matches {	-- Inserted nucleotide(s)
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+		}
+	}
 
 ontology
-    term_definitions = <
-        ["en"] = <
-            items = <
-                ["at0000"] = <
-                    text = <"Insertion variant">
-                    description = <"A sequence change where, compared to the reference sequence, one or more nucleotides are inserted and where the insertion is not a copy of a sequence immediately 5'
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Insertion variant">
+					description = <"A sequence change where, compared to the reference sequence, one or more nucleotides are inserted and where the insertion is not a copy of a sequence immediately 5'
 ">
-                >
-                ["at0001"] = <
-                    text = <"Start position">
-                    description = <"The position of the first of the two flanking nucleotides">
-                >
-                ["at0002"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0003"] = <
-                    text = <"End position">
-                    description = <"The position of the last of the two flanking nucleotides">
-                >
-                ["at0005"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0006"] = <
-                    text = <"Inserted nucleotide(s)">
-                    description = <"The sequence inserted between the two flanking nucleotides">
-                >
-                ["at0007"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-            >
-        >
-    >
+				>
+				["at0001"] = <
+					text = <"Start position">
+					description = <"The position of the first of the two flanking nucleotides">
+				>
+				["at0003"] = <
+					text = <"End position">
+					description = <"The position of the last of the two flanking nucleotides">
+				>
+				["at0006"] = <
+					text = <"Inserted nucleotide(s)">
+					description = <"The sequence inserted between the two flanking nucleotides">
+				>
+			>
+		>
+	>

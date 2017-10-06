@@ -1,494 +1,463 @@
-archetype (adl_version=1.4; uid=7c895cc2-f4b8-42f6-8d05-e7fa18127d0e)
-    openEHR-EHR-OBSERVATION.laboratory_test_result-genetic_test_result.v0
+archetype (adl_version=1.4)
+	openEHR-EHR-OBSERVATION.laboratory_test_result-genetic_test_result.v0
 specialize
-    openEHR-EHR-OBSERVATION.laboratory_test_result.v0
+	openEHR-EHR-OBSERVATION.laboratory_test_result-genetic_test_result.v0
 
 concept
-    [at0000.1]
-
+	[at0000.1]	-- Genetic test result
 language
-    original_language = <[ISO_639-1::en]>
-
+	original_language = <[ISO_639-1::en]>
 description
-    original_author = <
-        ["date"] = <"2017-02-23">
-        ["name"] = <"Cecilia Mascia">
-        ["organisation"] = <"CRS4, Italy">
-        ["email"] = <"cecilia.mascia@crs4.it">
-    >
-    lifecycle_state = <"NotSet">
-    other_contributors = <"Paolo Uva, CRS4, Italy","Gianluigi Zanetti, CRS4, Italy">
-    details = <
-        ["en"] = <
-            language = <[ISO_639-1::en]>
-            purpose = <"To record protocol, findings and interpretation of next generation sequencing tests performed (e.g., variant calling) on a patient sample.">
-            keywords = <"lab","laboratory","specimen","genetic","result","analysis","genomic","omic","genetic","NGS","WES","WGS","variant","call","variations","gene">
-            use = <"Use to record details about a genetic test, together with the findings and the protocol used. 
+	original_author = <
+		["name"] = <"Cecilia Mascia">
+		["organisation"] = <"CRS4, Italy">
+		["email"] = <"cecilia.mascia@crs4.it">
+		["date"] = <"2017-02-23">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record protocol, findings and interpretation of next generation sequencing tests performed (e.g., variant calling) on a patient sample.">
+			use = <"Use to record details about a genetic test, together with the findings and the protocol used. 
 
 This archetype has been designed to be expanded with CLUSTER archetypes, such as the CLUSTER.Genetic_findings, in order to report actual results, the devices or tools used, details about the specimen, and so forth.
 
 This archetype is suitable to record genetic test results of an individual: multiple specimen analysis involving more than one sample, for instance from a family member in case of rare deseases studies, has to be handled at a COMPOSITION level">
-        >
-    >
+			keywords = <"lab", "laboratory", "specimen", "genetic", "result", "analysis", "genomic", "omic", "genetic", "NGS", "WES", "WGS", "variant", "call", "variations", "gene">
+			misuse = <"">
+			copyright = <"">
+		>
+	>
+	lifecycle_state = <"NotSet">
+	other_contributors = <"Paolo Uva, CRS4, Italy", "Gianluigi Zanetti, CRS4, Italy", "Simone Leo, CRS4, Italy">
+	other_details = <
+		["references"] = <"\"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 \"">
+		["MD5-CAM-1.0.1"] = <"E1DFABE774A4F914E81C1A12B0632030">
+	>
 
 definition
-    OBSERVATION[at0000.1] occurrences matches {1..1} matches {  -- Genetic test result
-        data existence matches {1..1} matches {
-            HISTORY[at0001] occurrences matches {0..1} matches {  -- Event Series
-                events existence matches {0..1} cardinality matches {1..*; unordered} matches {
-                    EVENT[at0002] occurrences matches {0..*} matches {  -- Any event
-                        data existence matches {1..1} matches {
-                            ITEM_TREE[at0003] occurrences matches {0..1} matches {  -- Tree
-                                items existence matches {1..1} cardinality matches {1..*; unordered} matches {
-                                    ELEMENT[at0005.1] occurrences matches {1..1} matches {  -- Test performed
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.36] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    ELEMENT[at0.3] occurrences matches {0..1} matches {  -- Indication for test
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.39] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    allow_archetype CLUSTER[at0065] occurrences matches {0..*} matches {  -- Specimen detail
-                                        include
-                                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.specimen(-[a-zA-Z0-9_]+)*\.v0/}
-                                    }
-                                    ELEMENT[at0073] occurrences matches {0..1} matches {  -- Test status
-                                        value existence matches {1..1} matches {
-                                            DV_CODED_TEXT[at0.26] occurrences matches {0..1} matches {  -- 
-                                                defining_code existence matches {1..1} matches {
-                                                    [local::
-                                                    at0107,
-                                                    at0037,
-                                                    at0120,
-                                                    at0038,
-                                                    at0115,
-                                                    at0040,
-                                                    at0119,
-                                                    at0116,
-                                                    at0074]
-                                                }
-                                            }
-                                            DV_TEXT[at0.22] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    ELEMENT[at0075] occurrences matches {0..1} matches {  -- Test status timestamp
-                                        value existence matches {1..1} matches {
-                                            DV_DATE_TIME[at0.27] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    ELEMENT[at0077] occurrences matches {0..1} matches {  -- Diagnostic service category
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.28] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    ELEMENT[at0100.1] occurrences matches {0..1} matches {  -- Clinical information provided
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.16] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    allow_archetype CLUSTER[at0097.1] occurrences matches {0..*} matches {  -- Genetic findings
-                                        include
-                                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.Genetic_findings(-[a-zA-Z0-9_]+)*\.v1/}
-                                    }
-                                    ELEMENT[at0098.1] occurrences matches {0..*} matches {  -- Primary findings
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.18] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    ELEMENT[at0057.1] occurrences matches {0..1} matches {  -- Interpretation summary
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.17] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    ELEMENT[at0.2] occurrences matches {0..1} matches {  -- Recommendations
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.10] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    allow_archetype CLUSTER[at0118] occurrences matches {0..*} matches {  -- Multimedia representation
-                                        include
-                                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.multimedia(-[a-zA-Z0-9_]+)*\.v1/}
-                                    }
-                                    ELEMENT[at0101] occurrences matches {0..1} matches {  -- Comment
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.30] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        state existence matches {1..1} matches {
-                            ITEM_TREE[at0112] occurrences matches {0..1} matches {  -- Tree
-                                items existence matches {1..1} cardinality matches {0..*; unordered} matches {
-                                    ELEMENT[at0113] occurrences matches {0..*} matches {  -- Confounding factors
-                                        value existence matches {1..1} matches {
-                                            DV_TEXT[at0.33] occurrences matches {0..1} matches {*}  -- 
-                                        }
-                                    }
-                                    allow_archetype CLUSTER[at0114] occurrences matches {0..*} matches {  -- Confounding factors details
-                                        include
-                                            archetype_id/value matches {/.*/}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        protocol existence matches {0..1} matches {
-            ITEM_TREE[at0004] occurrences matches {0..1} matches {  -- Tree
-                items existence matches {0..1} cardinality matches {0..*; ordered} matches {
-                    allow_archetype CLUSTER[at0017] occurrences matches {0..1} matches {  -- Receiving laboratory
-                        include
-                            archetype_id/value matches {/.*/}
-                    }
-                    ELEMENT[at0068] occurrences matches {0..1} matches {  -- Laboratory test identifier
-                        value existence matches {0..1} matches {
-                            DV_IDENTIFIER[at0.32] occurrences matches {0..1} matches {*}  -- 
-                            DV_TEXT[at0.7] occurrences matches {0..1} matches {*}  -- 
-                        }
-                    }
-                    CLUSTER[at0094] occurrences matches {0..*} matches {  -- Test request details
-                        items existence matches {1..1} cardinality matches {1..*; unordered} matches {
-                            ELEMENT[at0106] occurrences matches {0..*} matches {  -- Original test requested name
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0.31] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            ELEMENT[at0062] occurrences matches {0..1} matches {  -- Requester order identifier
-                                value existence matches {0..1} matches {
-                                    DV_IDENTIFIER[at0.25] occurrences matches {0..1} matches {*}  -- 
-                                    DV_TEXT[at0.29] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            ELEMENT[at0063] occurrences matches {0..1} matches {  -- Receiver order identifier
-                                value existence matches {0..1} matches {
-                                    DV_IDENTIFIER[at0.34] occurrences matches {0..1} matches {*}  -- 
-                                    DV_TEXT[at0.9] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            allow_archetype CLUSTER[at0090] occurrences matches {0..1} matches {  -- Requester
-                                include
-                                    archetype_id/value matches {/.*/}
-                            }
-                            allow_archetype CLUSTER[at0035] occurrences matches {0..*} matches {  -- Distribution list
-                                include
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.distribution(-[a-zA-Z0-9_]+)*\.v1/}
-                            }
-                        }
-                    }
-                    ELEMENT[at0111] occurrences matches {0..1} matches {  -- Point-of-care device
-                        value existence matches {0..1} matches {
-                            DV_BOOLEAN[at0.20] occurrences matches {0..1} matches {  -- 
-                                value existence matches {1..1} matches {true, false}
-                            }
-                        }
-                    }
-                    CLUSTER[at0.4] occurrences matches {0..1} matches {  -- Analytic wet bench process
-                        items existence matches {1..1} cardinality matches {1..*; ordered} matches {
-                            ELEMENT[at0.6] occurrences matches {0..1} matches {  -- Sequencing method
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0.38] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            ELEMENT[at0.11] occurrences matches {0..*} matches {  -- Reagent(s)
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0.37] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            allow_archetype CLUSTER[at0110] occurrences matches {0..*} matches {  -- Test method/device details
-                                include
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}
-                            }
-                        }
-                    }
-                    CLUSTER[at0.5] occurrences matches {0..1} matches {  -- Bioinformatic analysis
-                        items existence matches {1..1} cardinality matches {1..*; ordered} matches {
-                            ELEMENT[at0.12] occurrences matches {0..1} matches {  -- Workflow ID
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0.23] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            ELEMENT[at0.14] occurrences matches {0..1} matches {  -- URL
-                                value existence matches {0..1} matches {
-                                    DV_URI[at0.21] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            ELEMENT[at0.13] occurrences matches {0..1} matches {  -- Version
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0.19] occurrences matches {0..1} matches {*}  -- 
-                                }
-                            }
-                            ELEMENT[at0.43] occurrences matches {0..*} matches {  -- Description
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0.44] occurrences matches {0..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    ELEMENT[at0.8] occurrences matches {0..1} matches {  -- References
-                        value existence matches {0..1} matches {
-                            DV_TEXT[at0.40] occurrences matches {0..1} matches {*}  -- 
-                        }
-                    }
-                    ELEMENT[at0.15] occurrences matches {0..1} matches {  -- Limitations
-                        value existence matches {0..1} matches {
-                            DV_TEXT[at0.35] occurrences matches {0..1} matches {*}  -- 
-                        }
-                    }
-                    allow_archetype CLUSTER[at0117] occurrences matches {0..*} matches {  -- Extension
-                        include
-                            archetype_id/value matches {/.*/}
-                    }
-                }
-            }
-        }
-    }
+	OBSERVATION[at0000.1] matches {	-- Genetic test result
+		data matches {
+			HISTORY[at0001] matches {	-- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..*} matches {	-- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {	-- Tree
+								items cardinality matches {1..*; unordered} matches {
+									ELEMENT[at0005.1] matches {	-- Test performed
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0.3] occurrences matches {0..1} matches {	-- Indication for test
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									allow_archetype CLUSTER[at0065] occurrences matches {0..*} matches {	-- Specimen detail
+										include
+											archetype_id/value matches {/openEHR-EHR-CLUSTER\.specimen(-[a-zA-Z0-9_]+)*\.v0/}
+									}
+									ELEMENT[at0073] occurrences matches {0..1} matches {	-- Test status
+										value matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {[local::]}
+											}
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0075] occurrences matches {0..1} matches {	-- Test status timestamp
+										value matches {
+											DV_DATE_TIME matches {*}
+										}
+									}
+									ELEMENT[at0077] occurrences matches {0..1} matches {	-- Diagnostic service category
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0100.1] occurrences matches {0..1} matches {	-- Clinical information provided
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									allow_archetype CLUSTER[at0097.1] occurrences matches {0..*} matches {	-- Genetic findings
+										include
+											archetype_id/value matches {/openEHR-EHR-CLUSTER\.Genetic_findings(-[a-zA-Z0-9_]+)*\.v1/}
+									}
+									ELEMENT[at0098.1] occurrences matches {0..*} matches {	-- Primary findings
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0057.1] occurrences matches {0..1} matches {	-- Interpretation summary
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0.2] occurrences matches {0..1} matches {	-- Recommendations
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									allow_archetype CLUSTER[at0118] occurrences matches {0..*} matches {	-- Multimedia representation
+										include
+											archetype_id/value matches {/openEHR-EHR-CLUSTER\.multimedia(-[a-zA-Z0-9_]+)*\.v1/}
+									}
+									ELEMENT[at0101] occurrences matches {0..1} matches {	-- Comment
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+						state matches {
+							ITEM_TREE[at0112] matches {	-- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0113] occurrences matches {0..*} matches {	-- Confounding factors
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									allow_archetype CLUSTER[at0114] occurrences matches {0..*} matches {	-- Confounding factors details
+										include
+											archetype_id/value matches {/.*/}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0004] matches {	-- Tree
+				items cardinality matches {0..*; ordered} matches {
+					allow_archetype CLUSTER[at0017] occurrences matches {0..1} matches {	-- Receiving laboratory
+						include
+							archetype_id/value matches {/.*/}
+					}
+					ELEMENT[at0068] occurrences matches {0..1} matches {	-- Laboratory test identifier
+						value matches {
+							DV_IDENTIFIER matches {*}
+							DV_TEXT matches {*}
+						}
+					}
+					CLUSTER[at0094] occurrences matches {0..*} matches {	-- Test request details
+						items cardinality matches {1..*; unordered} matches {
+							ELEMENT[at0106] occurrences matches {0..*} matches {	-- Original test requested name
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0062] occurrences matches {0..1} matches {	-- Requester order identifier
+								value matches {
+									DV_IDENTIFIER matches {*}
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0063] occurrences matches {0..1} matches {	-- Receiver order identifier
+								value matches {
+									DV_IDENTIFIER matches {*}
+									DV_TEXT matches {*}
+								}
+							}
+							allow_archetype CLUSTER[at0090] occurrences matches {0..1} matches {	-- Requester
+								include
+									archetype_id/value matches {/.*/}
+							}
+							allow_archetype CLUSTER[at0035] occurrences matches {0..*} matches {	-- Distribution list
+								include
+									archetype_id/value matches {/openEHR-EHR-CLUSTER\.distribution(-[a-zA-Z0-9_]+)*\.v1/}
+							}
+						}
+					}
+					ELEMENT[at0111] occurrences matches {0..1} matches {	-- Point-of-care device
+						value matches {
+							DV_BOOLEAN matches {
+								value matches {True, False}
+							}
+						}
+					}
+					CLUSTER[at0.4] occurrences matches {0..1} matches {	-- Analytic wet bench process
+						items cardinality matches {1..*; ordered} matches {
+							ELEMENT[at0.6] occurrences matches {0..1} matches {	-- Sequencing method
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0.11] occurrences matches {0..*} matches {	-- Reagent(s)
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							allow_archetype CLUSTER[at0110] occurrences matches {0..*} matches {	-- Test method/device details
+								include
+									archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}
+							}
+						}
+					}
+					CLUSTER[at0.5] occurrences matches {0..1} matches {	-- Bioinformatic analysis
+						items cardinality matches {1..*; ordered} matches {
+							ELEMENT[at0.12] occurrences matches {0..1} matches {	-- Workflow ID
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0.14] occurrences matches {0..1} matches {	-- URL
+								value matches {
+									DV_URI matches {*}
+								}
+							}
+							ELEMENT[at0.13] occurrences matches {0..1} matches {	-- Version
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0.43] occurrences matches {0..*} matches {	-- Description
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+						}
+					}
+					ELEMENT[at0.8] occurrences matches {0..1} matches {	-- References
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0.15] occurrences matches {0..1} matches {	-- Limitations
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					allow_archetype CLUSTER[at0117] occurrences matches {0..*} matches {	-- Extension
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
 
 ontology
-    term_definitions = <
-        ["en"] = <
-            items = <
-                ["at0.11"] = <
-                    text = <"Reagent(s)">
-                    description = <"*">
-                >
-                ["at0.12"] = <
-                    text = <"Workflow ID">
-                    description = <"The ID of the workflow that generated the bioinformatic analysis results">
-                >
-                ["at0.13"] = <
-                    text = <"Version">
-                    description = <"Version of the workflow">
-                >
-                ["at0.14"] = <
-                    text = <"URL">
-                    description = <"Link to an external source">
-                >
-                ["at0.15"] = <
-                    text = <"Limitations">
-                    description = <"Any limitations in analysis for">
-                >
-                ["at0.2"] = <
-                    text = <"Recommendations">
-                    description = <"Suggestion for further investigations or clinical management.">
-                    comment = <"For example: 'Recommendations for prophylaxis at the time of surgery and other high-risk situations'">
-                >
-                ["at0.3"] = <
-                    text = <"Indication for test">
-                    description = <"Indication for performing the test">
-                >
-                ["at0.4"] = <
-                    text = <"Analytic wet bench process">
-                    description = <"DNA extraction method and sequencing procedure">
-                >
-                ["at0.5"] = <
-                    text = <"Bioinformatic analysis">
-                    description = <"*">
-                >
-                ["at0.6"] = <
-                    text = <"Sequencing method">
-                    description = <"">
-                >
-                ["at0.8"] = <
-                    text = <"References">
-                    description = <"Supporting evidence used
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0.11"] = <
+					text = <"Reagent(s)">
+					description = <"*">
+				>
+				["at0.12"] = <
+					text = <"Workflow ID">
+					description = <"The ID of the workflow that generated the bioinformatic analysis results">
+				>
+				["at0.13"] = <
+					text = <"Version">
+					description = <"Version of the workflow">
+				>
+				["at0.14"] = <
+					text = <"URL">
+					description = <"Link to an external source">
+				>
+				["at0.15"] = <
+					text = <"Limitations">
+					description = <"Any limitations in analysis for">
+				>
+				["at0.2"] = <
+					text = <"Recommendations">
+					description = <"Suggestion for further investigations or clinical management.">
+				>
+				["at0.3"] = <
+					text = <"Indication for test">
+					description = <"Indication for performing the test">
+				>
+				["at0.4"] = <
+					text = <"Analytic wet bench process">
+					description = <"DNA extraction method and sequencing procedure">
+				>
+				["at0.43"] = <
+					text = <"Description">
+					description = <"Summary about the workflow">
+				>
+				["at0.44"] = <
+					text = <"DV_TEXT">
+					description = <"">
+				>
+				["at0.5"] = <
+					text = <"Bioinformatic analysis">
+					description = <"*">
+				>
+				["at0.6"] = <
+					text = <"Sequencing method">
+					description = <"">
+				>
+				["at0.8"] = <
+					text = <"References">
+					description = <"Supporting evidence used
 to classify variants">
-                >
-                ["at0000.1"] = <
-                    text = <"Genetic test result">
-                    description = <"The findings and interpretation of next generation sequencing tests performed on a patient sample.">
-                >
-                ["at0001"] = <
-                    text = <"Event Series">
-                    description = <"@ internal @">
-                >
-                ["at0002"] = <
-                    text = <"Any event">
-                    description = <"Default, unspecified point in time or interval event which may be explicitly defined in a template or at run-time.">
-                >
-                ["at0003"] = <
-                    text = <"Tree">
-                    description = <"@ internal @">
-                >
-                ["at0004"] = <
-                    text = <"Tree">
-                    description = <"@ internal @">
-                >
-                ["at0005.1"] = <
-                    text = <"Test performed">
-                    description = <"Denomination of the genetic analysis performed.">
-                    comment = <"For example: 'Factor V (Leiden) Mutation (R506Q)'.">
-                >
-                ["at0017"] = <
-                    comment = <"The receiving laboratory may either perform the test or refer it to another laboratory.">
-                    description = <"Details of the laboratory which received, and has responsibility for managing  the test request.">
-                    text = <"Receiving laboratory">
-                    fhir_mapping = <"DiagnosticReport.performer">
-                >
-                ["at0035"] = <
-                    text = <"Distribution list">
-                    description = <"Details of additional clinicians or organisations who require a copy of the test result.">
-                >
-                ["at0037"] = <
-                    text = <"Partial">
-                    description = <"This is a partial (e.g. initial, interim or preliminary) Test Result: data in the Test Result may be incomplete or unverified.">
-                >
-                ["at0038"] = <
-                    text = <"Final">
-                    description = <"The Test result is complete and verified by an authorised person.">
-                >
-                ["at0040"] = <
-                    text = <"Amended">
-                    description = <"The result has been modified subsequent to being Final, and is complete and verified by the responsible pathologist, and result data has been changed. This is a sub-category of 'Corrected'.">
-                >
-                ["at0057.1"] = <
-                    text = <"Interpretation summary">
-                    description = <"Narrative description of the overall result interpretations.">
-                >
-                ["at0062"] = <
-                    comment = <"Equivalent to the HL7 Placer Order Identifier.">
-                    text = <"Requester order identifier">
-                    description = <"The local identifier assigned by the requesting clinical system.">
-                >
-                ["at0063"] = <
-                    comment = <"Assigning an identifier to a request by the Laboratory lnformation System (LIS) enables tracking progress of the request and enables linking results to requests. It also provides a reference to assist with enquiries and it is usually equivalent to the HL7 Filler Order Identifier.">
-                    text = <"Receiver order identifier">
-                    description = <"The local identifier assigned to the test order by the order filler, usually by the Laboratory Information System (LIS).">
-                >
-                ["at0065"] = <
-                    comment = <"If the specimen type is sufficiently specified with a code in the Test result name, then this additional data is not required.  If there are multiple specimens, these may be represented per 'Result group'.">
-                    fhir_Mapping = <"DiagnosticReport.specimen">
-                    description = <"Details about the specimen, in the situation where all results in this test are derived from the same specimen.">
-                    text = <"Specimen detail">
-                >
-                ["at0068"] = <
-                    fhir_mapping = <"DiagnosticReport.identifier">
-                    text = <"Laboratory test identifier">
-                    description = <"The local identifier assigned by the receiving Laboratory Information System.">
-                >
-                ["at0073"] = <
-                    fhir_mapping = <"DiagnosticReport.status">
-                    text = <"Test status">
-                    description = <"The status of the laboratory test result as a whole.">
-                >
-                ["at0074"] = <
-                    text = <"Cancelled">
-                    description = <"The result is unavailable because the test was not started or not completed (also sometimes called 'aborted').">
-                >
-                ["at0075"] = <
-                    fhir_mapping = <"DiagnosticReport.issued">
-                    text = <"Test status timestamp">
-                    description = <"The date and/or time that the entire result was issued for the recorded ‘Test status’.">
-                >
-                ["at0077"] = <
-                    comment = <"For example, biochemistry, haematology. This data elements assists filtering of broad categories of results according to local laboratory arrangements. Coding with a terminology is desirable, where possible.
-">
-                    description = <"The diagnostic service that performs the examination.">
-                    text = <"Diagnostic service category">
-                    fhir_valueset = <"diagnostic-service-sections">
-                    fhir_mapping = <"DiagnosticReport.serviceCategory">
-                >
-                ["at0090"] = <
-                    text = <"Requester">
-                    description = <"Details of the clinician or organisation requesting the laboratory test result.">
-                >
-                ["at0094"] = <
-                    comment = <"In most situations there is one test request and a single corresponding test result, however this repeating cluster allows for the situation where there may be multiple test requests reported using a single test result.">
-                    description = <"Details about the test request.">
-                    text = <"Test request details">
-                    fhir_mapping = <"DiagnosticReport.requestDetail">
-                >
-                ["at0097.1"] = <
-                    comment = <"Details about the reported results.">
-                    text = <"Genetic findings">
-                    description = <"Details about the reported results.">
-                >
-                ["at0098.1"] = <
-                    text = <"Primary findings">
-                    description = <"A succint high level interpretative result">
-                    comment = <"Example: \"Positive -  This sample is positive for the Factor V R506Q mutation.\"
-">
-                >
-                ["at0100.1"] = <
-                    text = <"Clinical information provided">
-                    description = <"Description of clinical information available at the time of interpretation of results.">
-                    comment = <"For example: 'A first VTE associated with use of oral contraceptives'">
-                >
-                ["at0101"] = <
-                    text = <"Comment">
-                    description = <"Additional narrative about the test result not captured in other fields.">
-                >
-                ["at0106"] = <
-                    text = <"Original test requested name">
-                    description = <"Name of the original laboratory test requested, where the test requested differs from the test actually performed.">
-                >
-                ["at0107"] = <
-                    text = <"Registered">
-                    description = <"The existence of the test is registered in the Laboratory Information System, but there is nothing yet available.">
-                >
-                ["at0110"] = <
-                    comment = <"For example, structured details about the laboratory method and data interpretation used.">
-                    text = <"Test method/device details">
-                    description = <"Structured details about the laboratory test methodology used.">
-                >
-                ["at0111"] = <
-                    text = <"Point-of-care device">
-                    description = <"True if a point-of-care device supplies the test result rather than a formal laboratory service.">
-                >
-                ["at0112"] = <
-                    text = <"Tree">
-                    description = <"@ internal @">
-                >
-                ["at0113"] = <
-                    comment = <"for example: 'fasting'">
-                    text = <"Confounding factors">
-                    description = <"Issues or circumstances that impact on the accurate interpretation of the measurement or test result.">
-                >
-                ["at0114"] = <
-                    text = <"Confounding factors details">
-                    description = <"Details of issues or circumstances that impact on the accurate interpretation of the measurement or test result.">
-                >
-                ["at0115"] = <
-                    text = <"Corrected">
-                    description = <"The result has been modified subsequent to being Final, and is complete and verified by the responsible pathologist.">
-                >
-                ["at0116"] = <
-                    text = <"Entered in error">
-                    description = <"The Test Result has been withdrawn following previous Final release.">
-                >
-                ["at0117"] = <
-                    comment = <"For example: local information requirements or additional metadata to align with FHIR or CIMI equivalents.">
-                    text = <"Extension">
-                    description = <"Additional information required to capture local content or to align with other reference models/formalisms.">
-                >
-                ["at0118"] = <
-                    comment = <"Multiple formats are allowed but they should represent equivalent clinical content.">
-                    description = <"Digital image, video or diagram representing the test result.">
-                    text = <"Multimedia representation">
-                    fhir_mapping = <"DiagnosticReport.presentedForm">
-                >
-                ["at0119"] = <
-                    text = <"Appended">
-                    description = <"Subsequent to being final, the report has been modified by adding new content. The existing content is unchanged. This is a sub-category of 'Corrected'.">
-                >
-                ["at0120"] = <
-                    text = <"Preliminary">
-                    description = <"Verified early results are available, but not all results are final. This is a sub-category of 'Partial'.">
-                >
-                ["at0.43"] = <
-                    text = <"Description">
-                    description = <"Summary about the workflow">
-                >
-                ["at0.44"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-            >
-        >
-    >
+				>
+				["at0000"] = <
+					text = <"unknown">
+					description = <"unknown">
+				>
+				["at0000.1"] = <
+					text = <"Genetic test result">
+					description = <"The findings and interpretation of next generation sequencing tests performed on a patient sample.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"Default, unspecified point in time or interval event which may be explicitly defined in a template or at run-time.">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0005.1"] = <
+					text = <"Test performed">
+					description = <"Denomination of the genetic analysis performed.">
+				>
+				["at0017"] = <
+					text = <"Receiving laboratory">
+					description = <"Details of the laboratory which received, and has responsibility for managing  the test request.">
+				>
+				["at0035"] = <
+					text = <"Distribution list">
+					description = <"Details of additional clinicians or organisations who require a copy of the test result.">
+				>
+				["at0037"] = <
+					text = <"Partial">
+					description = <"This is a partial (e.g. initial, interim or preliminary) Test Result: data in the Test Result may be incomplete or unverified.">
+				>
+				["at0038"] = <
+					text = <"Final">
+					description = <"The Test result is complete and verified by an authorised person.">
+				>
+				["at0040"] = <
+					text = <"Amended">
+					description = <"The result has been modified subsequent to being Final, and is complete and verified by the responsible pathologist, and result data has been changed. This is a sub-category of 'Corrected'.">
+				>
+				["at0057.1"] = <
+					text = <"Interpretation summary">
+					description = <"Narrative description of the overall result interpretations.">
+				>
+				["at0062"] = <
+					text = <"Requester order identifier">
+					description = <"The local identifier assigned by the requesting clinical system.">
+				>
+				["at0063"] = <
+					text = <"Receiver order identifier">
+					description = <"The local identifier assigned to the test order by the order filler, usually by the Laboratory Information System (LIS).">
+				>
+				["at0065"] = <
+					text = <"Specimen detail">
+					description = <"Details about the specimen, in the situation where all results in this test are derived from the same specimen.">
+				>
+				["at0068"] = <
+					text = <"Laboratory test identifier">
+					description = <"The local identifier assigned by the receiving Laboratory Information System.">
+				>
+				["at0073"] = <
+					text = <"Test status">
+					description = <"The status of the laboratory test result as a whole.">
+				>
+				["at0074"] = <
+					text = <"Cancelled">
+					description = <"The result is unavailable because the test was not started or not completed (also sometimes called 'aborted').">
+				>
+				["at0075"] = <
+					text = <"Test status timestamp">
+					description = <"The date and/or time that the entire result was issued for the recorded ‘Test status’.">
+				>
+				["at0077"] = <
+					text = <"Diagnostic service category">
+					description = <"The diagnostic service that performs the examination.">
+				>
+				["at0090"] = <
+					text = <"Requester">
+					description = <"Details of the clinician or organisation requesting the laboratory test result.">
+				>
+				["at0094"] = <
+					text = <"Test request details">
+					description = <"Details about the test request.">
+				>
+				["at0097.1"] = <
+					text = <"Genetic findings">
+					description = <"Details about the reported results.">
+				>
+				["at0098.1"] = <
+					text = <"Primary findings">
+					description = <"A succint high level interpretative result">
+				>
+				["at0100.1"] = <
+					text = <"Clinical information provided">
+					description = <"Description of clinical information available at the time of interpretation of results.">
+				>
+				["at0101"] = <
+					text = <"Comment">
+					description = <"Additional narrative about the test result not captured in other fields.">
+				>
+				["at0106"] = <
+					text = <"Original test requested name">
+					description = <"Name of the original laboratory test requested, where the test requested differs from the test actually performed.">
+				>
+				["at0107"] = <
+					text = <"Registered">
+					description = <"The existence of the test is registered in the Laboratory Information System, but there is nothing yet available.">
+				>
+				["at0110"] = <
+					text = <"Test method/device details">
+					description = <"Structured details about the laboratory test methodology used.">
+				>
+				["at0111"] = <
+					text = <"Point-of-care device">
+					description = <"True if a point-of-care device supplies the test result rather than a formal laboratory service.">
+				>
+				["at0112"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0113"] = <
+					text = <"Confounding factors">
+					description = <"Issues or circumstances that impact on the accurate interpretation of the measurement or test result.">
+				>
+				["at0114"] = <
+					text = <"Confounding factors details">
+					description = <"Details of issues or circumstances that impact on the accurate interpretation of the measurement or test result.">
+				>
+				["at0115"] = <
+					text = <"Corrected">
+					description = <"The result has been modified subsequent to being Final, and is complete and verified by the responsible pathologist.">
+				>
+				["at0116"] = <
+					text = <"Entered in error">
+					description = <"The Test Result has been withdrawn following previous Final release.">
+				>
+				["at0117"] = <
+					text = <"Extension">
+					description = <"Additional information required to capture local content or to align with other reference models/formalisms.">
+				>
+				["at0118"] = <
+					text = <"Multimedia representation">
+					description = <"Digital image, video or diagram representing the test result.">
+				>
+				["at0119"] = <
+					text = <"Appended">
+					description = <"Subsequent to being final, the report has been modified by adding new content. The existing content is unchanged. This is a sub-category of 'Corrected'.">
+				>
+				["at0120"] = <
+					text = <"Preliminary">
+					description = <"Verified early results are available, but not all results are final. This is a sub-category of 'Partial'.">
+				>
+			>
+		>
+	>

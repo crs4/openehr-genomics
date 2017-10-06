@@ -1,107 +1,85 @@
 archetype (adl_version=1.4)
-    openEHR-EHR-CLUSTER.indel_variant.v1
+	openEHR-EHR-CLUSTER.indel_variant.v1
 
 concept
-    [at0000]
-
+	[at0000]	-- Indel variant
 language
-    original_language = <[ISO_639-1::en]>
-
+	original_language = <[ISO_639-1::en]>
 description
-    original_author = <
-        ["date"] = <"2017-02-24">
-        ["name"] = <"Cecilia Mascia">
-        ["organisation"] = <"CRS4, Italy">
-        ["email"] = <"cecilia.mascia@crs4.it">
-    >
-    lifecycle_state = <"Draft">
-    other_contributors = <"Paolo Uva, CRS4, Italy","Gianlugi Zanetti, CRS4, Italy">
-    details = <
-        ["en"] = <
-            language = <[ISO_639-1::en]>
-            purpose = <"To describe an indel variant observed in a sequence according to the HGVS nomenclature">
-            keywords = <"indel","variation","genetic","genomic","variant">
-            other_details = <
-                ["Reference"] = <"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 ">
-            >
-        >
-    >
+	original_author = <
+		["name"] = <"Cecilia Mascia">
+		["organisation"] = <"CRS4, Italy">
+		["email"] = <"cecilia.mascia@crs4.it">
+		["date"] = <"2017-02-24">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To describe an indel variant observed in a sequence according to the HGVS nomenclature">
+			use = <"">
+			keywords = <"indel", "variation", "genetic", "genomic", "variant">
+			misuse = <"">
+			copyright = <"">
+		>
+	>
+	lifecycle_state = <"NotSet">
+	other_contributors = <"Paolo Uva, CRS4, Italy", "Gianlugi Zanetti, CRS4, Italy", "Simone Leo, CRS4, Italy">
+	other_details = <
+		["references"] = <"\"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 \"">
+		["MD5-CAM-1.0.1"] = <"C7B1E853C98FB23C73B2EDEBA5EC0D57">
+	>
 
 definition
-    CLUSTER[at0000] occurrences matches {1..1} matches {  -- Indel variant
-        items existence matches {0..1} cardinality matches {0..*; ordered} matches {
-            ELEMENT[at0001] occurrences matches {1..1} matches {  -- Start position
-                value existence matches {0..1} matches {
-                    DV_COUNT[at0002] occurrences matches {1..1} matches {  -- DV_COUNT
-                        magnitude existence matches {1..1} matches {*}
-                    }
-                }
-            }
-            ELEMENT[at0003] occurrences matches {0..1} matches {  -- End position
-                value existence matches {0..1} matches {
-                    DV_COUNT[at0004] occurrences matches {0..1} matches {  -- DV_COUNT
-                        magnitude existence matches {1..1} matches {*}
-                    }
-                }
-            }
-            ELEMENT[at0005] occurrences matches {0..1} matches {  -- Deleted nucleotide(s)
-                value existence matches {0..1} matches {
-                    DV_TEXT[at0006] occurrences matches {1..1} matches {  -- DV_TEXT
-                        value existence matches {1..1} matches {/.*/}
-                    }
-                }
-            }
-            ELEMENT[at0007] occurrences matches {1..1} matches {  -- Inserted nucleotide(s)
-                value existence matches {0..1} matches {
-                    DV_TEXT[at0008] occurrences matches {1..1} matches {  -- DV_TEXT
-                        value existence matches {1..1} matches {/.*/}
-                    }
-                }
-            }
-        }
-    }
+	CLUSTER[at0000] matches {	-- Indel variant
+		items cardinality matches {2..*; ordered} matches {
+			ELEMENT[at0001] matches {	-- Start position
+				value matches {
+					DV_COUNT matches {*}
+				}
+			}
+			ELEMENT[at0003] occurrences matches {0..1} matches {	-- End position
+				value matches {
+					DV_COUNT matches {*}
+				}
+			}
+			ELEMENT[at0005] occurrences matches {0..1} matches {	-- Deleted nucleotide(s)
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0007] matches {	-- Inserted nucleotide(s)
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+		}
+	}
 
 ontology
-    term_definitions = <
-        ["en"] = <
-            items = <
-                ["at0000"] = <
-                    text = <"Indel variant">
-                    description = <"A sequence change where, compared to a reference sequence, one or more nucleotides are replaced by one or more other nucleotides and which is not a substitution, inversion or conversion.
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Indel variant">
+					description = <"A sequence change where, compared to a reference sequence, one or more nucleotides are replaced by one or more other nucleotides and which is not a substitution, inversion or conversion.
 ">
-                >
-                ["at0001"] = <
-                    text = <"Start position">
-                    description = <"Position of the deleted nucleotide or the first nucleotide of the deleted range">
-                >
-                ["at0002"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0003"] = <
-                    text = <"End position">
-                    description = <"Position of the last nucleotide of the deleted range">
-                >
-                ["at0004"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0005"] = <
-                    text = <"Deleted nucleotide(s)">
-                    description = <"The deleted nucleotide or sequence ">
-                >
-                ["at0006"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0007"] = <
-                    text = <"Inserted nucleotide(s)">
-                    description = <"The sequence inserted ">
-                >
-                ["at0008"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-            >
-        >
-    >
+				>
+				["at0001"] = <
+					text = <"Start position">
+					description = <"Position of the deleted nucleotide or the first nucleotide of the deleted range">
+				>
+				["at0003"] = <
+					text = <"End position">
+					description = <"Position of the last nucleotide of the deleted range">
+				>
+				["at0005"] = <
+					text = <"Deleted nucleotide(s)">
+					description = <"The deleted nucleotide or sequence ">
+				>
+				["at0007"] = <
+					text = <"Inserted nucleotide(s)">
+					description = <"The sequence inserted ">
+				>
+			>
+		>
+	>

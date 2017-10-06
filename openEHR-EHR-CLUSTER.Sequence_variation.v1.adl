@@ -1,504 +1,356 @@
 archetype (adl_version=1.4)
-    openEHR-EHR-CLUSTER.Sequence_variation.v1
+	openEHR-EHR-CLUSTER.Sequence_variation.v1
 
 concept
-    [at0000]
-
+	[at0000]	-- Sequence variation
 language
-    original_language = <[ISO_639-1::en]>
-
+	original_language = <[ISO_639-1::en]>
 description
-    original_author = <
-        ["date"] = <"2017-02-07">
-        ["name"] = <"Cecilia Mascia">
-        ["organisation"] = <"CRS4, Italy">
-        ["email"] = <"cecilia.mascia@crs4.it">
-    >
-    lifecycle_state = <"Public">
-    other_contributors = <"Paolo Uva, CRS4, Italy","Gianluigi Zanetti, CRS4, Italy">
-    details = <
-        ["en"] = <
-            language = <[ISO_639-1::en]>
-            purpose = <"To record data about a single sequence variation derived from genetic tests">
-            keywords = <"Variation","Alternate","allele","VCF","Variant","genetic","genomic","variant calling","sequence">
-            use = <"This archetype is meant to be used in the SLOT 'Seq	uence variation' within the 'CLUSTER.Genetic_findings' archetype. It should represent a single raw of a VCF file, corresponding to a single specific position in the genome.">
-            other_details = <
-                ["References"] = <"“The Variant Call Format ( VCF ) Version 4 . 2 Specification,” Online Resource, pp. 1–28, 2015. Available at: http://samtools.github.io/hts-specs/VCFv4.2.pdf [Accessed 10 Feb. 2017]. 
-                Varnomen.hgvs.org. (2017). Sequence Variant Nomenclature. [online] Available at: http://varnomen.hgvs.org/ [Accessed 10 Feb. 2017].  Genenames.org. (2017). HGNC Guidelines | HUGO Gene Nomenclature Committee. [online] Available at: http://www.genenames.org/about/guidelines [Accessed 10 Feb. 2017]. ">
-                ["Reference"] = <"HGNC Database, HUGO Gene Nomenclature Committee (HGNC), EMBL Outstation - Hinxton, European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridgeshire, CB10 1SD, UK www.genenames.org.">
-            >
-        >
-    >
+	original_author = <
+		["name"] = <"Cecilia Mascia">
+		["email"] = <"cecilia.mascia@crs4.it">
+		["organisation"] = <"CRS4, Italy">
+		["date"] = <"2017-02-07">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record data about a single sequence variation derived from genetic tests">
+			use = <"This archetype is meant to be used in the SLOT 'Seq	uence variation' within the 'CLUSTER.Genetic_findings' archetype. It should represent a single raw of a VCF file, corresponding to a single specific position in the genome.">
+			keywords = <"Variation", "Alternate", "allele", "VCF", "Variant", "genetic", "genomic", "variant calling", "sequence">
+			misuse = <"">
+			copyright = <"">
+		>
+	>
+	lifecycle_state = <"NotSet">
+	other_contributors = <"Paolo Uva, CRS4, Italy", "Gianluigi Zanetti, CRS4, Italy", "Simone Leo, CRS4, Italy">
+	other_details = <
+		["references"] = <"\"Den Dunnen et al. (2016) HGVS recommendations for the description of sequence variants: 2016 update. Hum.Mutat. 25: 37: 564-569 \"">
+		["MD5-CAM-1.0.1"] = <"BFD0F2F68EAD89E1FE35BD46631D984B">
+	>
 
 definition
-    CLUSTER[at0000] occurrences matches {1..1} matches {  -- Sequence variation
-        items existence matches {0..1} cardinality matches {0..*; ordered} matches {
-            CLUSTER[at0002] occurrences matches {1..*} matches {  -- Genomic location
-                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                    allow_archetype CLUSTER[at0008] occurrences matches {1..1} matches {  -- Reference sequence
-                        include
-                            archetype_id/value matches {/openEHR-EHR-CLUSTER\.Reference_sequence(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                    }
-                    ELEMENT[at0096] occurrences matches {1..*} matches {  -- Genome assembly
-                        value existence matches {0..1} matches {
-                            DV_TEXT[at0100] occurrences matches {1..1} matches {  -- DV_TEXT
-                                value existence matches {1..1} matches {/.*/}
-                            }
-                        }
-                    }
-                    CLUSTER[at0063] occurrences matches {1..1} matches {  -- Genomic region
-                        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                            ELEMENT[at0057] occurrences matches {1..1} matches {  -- Start position
-                                value existence matches {0..1} matches {
-                                    DV_COUNT[at0058] occurrences matches {1..1} matches {  -- DV_COUNT
-                                        magnitude existence matches {1..1} matches {*}
-                                    }
-                                }
-                            }
-                            ELEMENT[at0014] occurrences matches {1..1} matches {  -- Contig
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0003] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    CLUSTER[at0012] occurrences matches {1..1} matches {  -- Gene
-                        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                            ELEMENT[at0015] occurrences matches {1..1} matches {  -- Gene symbol
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0016] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                            ELEMENT[at0024] occurrences matches {0..1} matches {  -- Full name
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0056] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            CLUSTER[at0026] occurrences matches {1..1} matches {  -- Variation description
-                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                    CLUSTER[at0045] occurrences matches {1..*} matches {  -- Variation identifier
-                        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                            ELEMENT[at0110] occurrences matches {1..1} matches {  -- Source name
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0111] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                            ELEMENT[at0046] occurrences matches {1..1} matches {  -- Identification
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0047] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                            ELEMENT[at0048] occurrences matches {0..1} matches {  -- Version
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0049] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                            ELEMENT[at0050] occurrences matches {1..1} matches {  -- URL
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0051] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    CLUSTER[at0072] occurrences matches {1..*} matches {  -- Alternate
-                        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                            ELEMENT[at0060] occurrences matches {1..1} matches {  -- Variant type
-                                value existence matches {0..1} matches {
-                                    DV_CODED_TEXT[at0061] occurrences matches {1..1} matches {  -- DV_CODED_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                        defining_code existence matches {1..1} matches {
-                                            [LOCAL::
-                                            at0006,
-                                            at0007,
-                                            at0009,
-                                            at0010,
-                                            at0011,
-                                            at0013,
-                                            at0017,
-                                            at0018]
-                                        }
-                                    }
-                                }
-                            }
-                            allow_archetype CLUSTER[at0055] occurrences matches {1..1} matches {  -- Variant
-                                include
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.insertion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.indel_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.substitution_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.deletion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.repeated_sequence_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.duplication_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.inversion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                                    archetype_id/value matches {/openEHR-EHR-CLUSTER\.conversion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
-                            }
-                            ELEMENT[at0086] occurrences matches {1..1} matches {  -- Allele depth
-                                value existence matches {0..1} matches {
-                                    DV_COUNT[at0094] occurrences matches {0..1} matches {  -- DV_COUNT
-                                        magnitude existence matches {1..1} matches {*}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    ELEMENT[at0071] occurrences matches {1..1} matches {  -- Quality 
-                        value existence matches {0..1} matches {
-                            DV_COUNT[at0073] occurrences matches {1..1} matches {  -- DV_COUNT
-                                magnitude existence matches {1..1} matches {*}
-                            }
-                        }
-                    }
-                    CLUSTER[at0093] occurrences matches {0..*} matches {  -- Filtering
-                        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                            CLUSTER[at0104] occurrences matches {1..*} matches {  -- Filter
-                                items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                                    ELEMENT[at0106] occurrences matches {1..1} matches {  -- ID
-                                        value existence matches {0..1} matches {
-                                            DV_TEXT[at0107] occurrences matches {1..1} matches {  -- DV_TEXT
-                                                value existence matches {1..1} matches {/.*/}
-                                            }
-                                        }
-                                    }
-                                    ELEMENT[at0108] occurrences matches {1..1} matches {  -- Description
-                                        value existence matches {0..1} matches {
-                                            DV_TEXT[at0109] occurrences matches {1..1} matches {  -- DV_TEXT
-                                                value existence matches {1..1} matches {/.*/}
-                                            }
-                                        }
-                                    }
-                                    ELEMENT[at0097] occurrences matches {1..1} matches {  -- Filter passed
-                                        value existence matches {0..1} matches {
-                                            DV_BOOLEAN[at0004] occurrences matches {1..1} matches {  -- DV_BOOLEAN
-                                                value existence matches {1..1} matches {true, false}
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    ELEMENT[at0087] occurrences matches {1..1} matches {  -- Total depth
-                        value existence matches {0..1} matches {
-                            DV_COUNT[at0095] occurrences matches {0..1} matches {  -- DV_COUNT
-                                magnitude existence matches {1..1} matches {*}
-                            }
-                        }
-                    }
-                    CLUSTER[at0081] occurrences matches {1..1} matches {  -- Genotype characterization
-                        items existence matches {1..1} cardinality matches {1..*; ordered; unique} matches {
-                            ELEMENT[at0082] occurrences matches {1..1} matches {  -- Genotype
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0088] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                            ELEMENT[at0084] occurrences matches {1..1} matches {  -- Genotype quality
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0089] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                            ELEMENT[at0085] occurrences matches {1..1} matches {  -- Genotype probability
-                                value existence matches {0..1} matches {
-                                    DV_TEXT[at0090] occurrences matches {1..1} matches {  -- DV_TEXT
-                                        value existence matches {1..1} matches {/.*/}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+	CLUSTER[at0000] matches {	-- Sequence variation
+		items cardinality matches {2..*; ordered} matches {
+			CLUSTER[at0002] occurrences matches {1..*} matches {	-- Genomic location
+				items cardinality matches {4..*; ordered} matches {
+					allow_archetype CLUSTER[at0008] matches {	-- Reference sequence
+						include
+							archetype_id/value matches {/openEHR-EHR-CLUSTER\.Reference_sequence(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+					}
+					ELEMENT[at0096] occurrences matches {1..*} matches {	-- Genome assembly
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					CLUSTER[at0063] matches {	-- Genomic region
+						items cardinality matches {2..*; ordered} matches {
+							ELEMENT[at0057] matches {	-- Start position
+								value matches {
+									DV_COUNT matches {*}
+								}
+							}
+							ELEMENT[at0014] matches {	-- Contig
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+						}
+					}
+					CLUSTER[at0012] matches {	-- Gene
+						items cardinality matches {1..*; ordered} matches {
+							ELEMENT[at0015] matches {	-- Gene symbol
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0024] occurrences matches {0..1} matches {	-- Full name
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+						}
+					}
+				}
+			}
+			CLUSTER[at0026] matches {	-- Variation description
+				items cardinality matches {5..*; ordered} matches {
+					CLUSTER[at0045] occurrences matches {1..*} matches {	-- Variation identifier
+						items cardinality matches {3..*; ordered} matches {
+							ELEMENT[at0110] matches {	-- Source name
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0046] matches {	-- Identification
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0048] occurrences matches {0..1} matches {	-- Version
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0050] matches {	-- URL
+								value matches {
+									DV_URI matches {*}
+								}
+							}
+						}
+					}
+					CLUSTER[at0072] occurrences matches {1..*} matches {	-- Alternate
+						items cardinality matches {3..*; ordered} matches {
+							ELEMENT[at0060] matches {	-- Variant type
+								value matches {
+									DV_CODED_TEXT matches {
+										defining_code matches {
+											[local::
+											at0112, 	-- del
+											at0113, 	-- dup
+											at0114, 	-- ins
+											at0115, 	-- inv
+											at0116, 	-- sub
+											at0117, 	-- indel
+											at0118, 	-- rep
+											at0119]	-- conv
+										}
+									}
+								}
+							}
+							allow_archetype CLUSTER[at0055] matches {	-- Variant
+								include
+									archetype_id/value matches {/openEHR-EHR-CLUSTER\.repeated_sequence_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+|openEHR-EHR-CLUSTER\.indel_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+|openEHR-EHR-CLUSTER\.duplication_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+|openEHR-EHR-CLUSTER\.insertion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+|openEHR-EHR-CLUSTER\.deletion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+|openEHR-EHR-CLUSTER\.conversion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+|openEHR-EHR-CLUSTER\.substitution_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+|openEHR-EHR-CLUSTER\.inversion_variant(-[a-zA-Z0-9_]+)*\.v[0-9\.]+/}
+							}
+							ELEMENT[at0086] matches {	-- Allele depth
+								value matches {
+									C_DV_QUANTITY <
+									>
+								}
+							}
+						}
+					}
+					ELEMENT[at0071] matches {	-- Quality
+						value matches {
+							C_DV_QUANTITY <
+							>
+						}
+					}
+					CLUSTER[at0093] occurrences matches {0..*} matches {	-- Filtering
+						items cardinality matches {1..*; ordered} matches {
+							CLUSTER[at0104] occurrences matches {1..*} matches {	-- Filter
+								items cardinality matches {3..*; ordered} matches {
+									ELEMENT[at0106] matches {	-- ID
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0108] matches {	-- Description
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0097] matches {	-- Filter passed
+										value matches {
+											DV_BOOLEAN matches {
+												value matches {True, False}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					ELEMENT[at0087] matches {	-- Total depth
+						value matches {
+							C_DV_QUANTITY <
+							>
+						}
+					}
+					CLUSTER[at0081] matches {	-- Genotype characterization
+						items cardinality matches {3..*; ordered} matches {
+							ELEMENT[at0082] matches {	-- Genotype
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0084] matches {	-- Genotype quality
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0085] matches {	-- Genotype probability
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 ontology
-    terminologies_available = <"DCM", "SNOMED-CT">
-    term_definitions = <
-        ["en"] = <
-            items = <
-                ["at0000"] = <
-                    text = <"Sequence variation">
-                    description = <"A difference between the reference sequence and the sample sequence">
-                >
-                ["at0002"] = <
-                    text = <"Genomic location">
-                    description = <"The position in respect to a genomic or coding sequence, following the HGVS nomenclature.">
-                    comment = <"VCf field: POS">
-                >
-                ["at0012"] = <
-                    text = <"Gene">
-                    description = <"A DNA region that contributes to phenotype/function specifying the amino acid sequence of a protein.">
-                >
-                ["at0014"] = <
-                    text = <"Contig">
-                    description = <"">
-                    comment = <"VCF field: #CHROM ">
-                >
-                ["at0015"] = <
-                    text = <"Gene symbol">
-                    description = <"The official gene symbol approved by the HGNC, which is a short abbreviated form of the gene name">
-                >
-                ["at0016"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0024"] = <
-                    text = <"Full name">
-                    description = <"The full gene name approved by the HGNC that convey the character or function of the gene.">
-                >
-                ["at0026"] = <
-                    text = <"Variation description">
-                    description = <"">
-                >
-                ["at0045"] = <
-                    text = <"Variation identifier">
-                    description = <"A reference to a specific variation recorded into a biological variation database">
-                    comment = <"If this is a dbSNP variant it is encouraged to use the rs number(s) to identify it.">
-                >
-                ["at0046"] = <
-                    text = <"Identification">
-                    description = <"The ID of a variation record">
-                    comment = <"VCF field: ID">
-                >
-                ["at0047"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0048"] = <
-                    text = <"Version">
-                    description = <"">
-                >
-                ["at0049"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0050"] = <
-                    text = <"URL">
-                    description = <"Network address">
-                >
-                ["at0051"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0056"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0057"] = <
-                    text = <"Start position">
-                    description = <"Number(s) referring to the nucleotide(s) affected, according to the HGVS notation.">
-                    comment = <"VCF field: POS">
-                >
-                ["at0058"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0063"] = <
-                    text = <"Genomic region">
-                    description = <"Details about the specific position of the alteration">
-                >
-                ["at0071"] = <
-                    text = <"Quality ">
-                    description = <"Phred-scaled quality score for the assertion made in the Observed nucleotide(s)">
-                    comment = <"VCF field: QUAL">
-                >
-                ["at0072"] = <
-                    text = <"Alternate">
-                    description = <"A variant form of the same gene">
-                >
-                ["at0073"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0081"] = <
-                    text = <"Genotype characterization">
-                    description = <"Genotype information">
-                >
-                ["at0082"] = <
-                    text = <"Genotype">
-                    description = <"Combination of the allele with regards to the specific gene of interests, encoded as allele separated values (0 for the reference allele, 1 for the first allternate, etc.)">
-                    comment = <"VCF FORMAT field: GT">
-                >
-                ["at0084"] = <
-                    text = <"Genotype quality">
-                    description = <"Genotype quality, encoded as a phred quality">
-                    comment = <"VCF FORMAT field: GQ">
-                >
-                ["at0085"] = <
-                    text = <"Genotype probability">
-                    description = <"">
-                >
-                ["at0086"] = <
-                    text = <"Allele depth">
-                    description = <"The number of reads that support the reported allele">
-                >
-                ["at0087"] = <
-                    text = <"Total depth">
-                    description = <"Total number of reads">
-                >
-                ["at0088"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0089"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0090"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0093"] = <
-                    text = <"Filtering">
-                    description = <"Section to describe the filters (if any) that has been applied to the data">
-                    comment = <"Is a restatement of the VCF field: FILTER">
-                >
-                ["at0097"] = <
-                    text = <"Filter passed">
-                    description = <"Wheter or not the position has passed the applied filter. ">
-                >
-                ["at0104"] = <
-                    text = <"Filter">
-                    description = <"Filter's details">
-                >
-                ["at0106"] = <
-                    text = <"ID">
-                    description = <"Identificative string">
-                >
-                ["at0107"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0108"] = <
-                    text = <"Description">
-                    description = <"Description of how the filter works">
-                >
-                ["at0109"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0094"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0095"] = <
-                    text = <"DV_COUNT">
-                    description = <"">
-                >
-                ["at0096"] = <
-                    text = <"Genome assembly">
-                    description = <"The specific version of the human sequence assembly used for annotation (NCBI or UCSC)">
-                >
-                ["at0100"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0110"] = <
-                    text = <"Source name">
-                    description = <"The name of the public data source that gives the variant identification ">
-                >
-                ["at0111"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0055"] = <
-                    text = <"Variant">
-                    description = <"The specific variation occurred">
-                >
-                ["at0060"] = <
-                    text = <"Variant type">
-                    description = <"The type of the observed variant">
-                >
-                ["at0061"] = <
-                    text = <"DV_CODED_TEXT">
-                    description = <"">
-                >
-                ["at0008"] = <
-                    text = <"Reference sequence">
-                    description = <"A sequence file that is used as a reference to describe variants that are present in a analysed sequence ">
-                >
-                ["at0003"] = <
-                    text = <"DV_TEXT">
-                    description = <"">
-                >
-                ["at0004"] = <
-                    text = <"DV_BOOLEAN">
-                    description = <"">
-                >
-                ["at0006"] = <
-                    text = <"del">
-                    description = <"deletion">
-                >
-                ["at0007"] = <
-                    text = <"dup">
-                    description = <"duplication">
-                >
-                ["at0009"] = <
-                    text = <"ins">
-                    description = <"insertion">
-                >
-                ["at0010"] = <
-                    text = <"inv">
-                    description = <"ininversion">
-                >
-                ["at0011"] = <
-                    text = <"sub">
-                    description = <"substitution">
-                >
-                ["at0013"] = <
-                    text = <"indel">
-                    description = <"insertion/deletion">
-                >
-                ["at0017"] = <
-                    text = <"rep">
-                    description = <"repeated sequence">
-                >
-                ["at0018"] = <
-                    text = <"conv">
-                    description = <"conversion">
-                >
-            >
-        >
-    >
-    constraint_definitions = <
-        ["en"] = <
-            items = <
-            >
-        >
-    >
-    term_binding = <
-        ["DCM"] = <
-            items = <
-            >
-        >
-        ["SNOMED-CT"] = <
-            items = <
-            >
-        >
-    >
-    constraint_binding = <
-        ["SNOMED-CT"] = <
-            items = <
-            >
-        >
-    >
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Sequence variation">
+					description = <"A difference between the reference sequence and the sample sequence">
+				>
+				["at0002"] = <
+					text = <"Genomic location">
+					description = <"The position in respect to a genomic or coding sequence, following the HGVS nomenclature.">
+				>
+				["at0008"] = <
+					text = <"Reference sequence">
+					description = <"A sequence file that is used as a reference to describe variants that are present in a analysed sequence">
+				>
+				["at0012"] = <
+					text = <"Gene">
+					description = <"A DNA region that contributes to phenotype/function specifying the amino acid sequence of a protein.">
+				>
+				["at0014"] = <
+					text = <"Contig">
+					description = <"">
+				>
+				["at0015"] = <
+					text = <"Gene symbol">
+					description = <"The official gene symbol approved by the HGNC, which is a short abbreviated form of the gene name">
+				>
+				["at0024"] = <
+					text = <"Full name">
+					description = <"The full gene name approved by the HGNC that convey the character or function of the gene.">
+				>
+				["at0026"] = <
+					text = <"Variation description">
+					description = <"">
+				>
+				["at0045"] = <
+					text = <"Variation identifier">
+					description = <"A reference to a specific variation recorded into a biological variation database">
+				>
+				["at0046"] = <
+					text = <"Identification">
+					description = <"The ID of a variation record">
+				>
+				["at0048"] = <
+					text = <"Version">
+					description = <"">
+				>
+				["at0050"] = <
+					text = <"URL">
+					description = <"Network address">
+				>
+				["at0055"] = <
+					text = <"Variant">
+					description = <"The specific variation occurred">
+				>
+				["at0057"] = <
+					text = <"Start position">
+					description = <"Number(s) referring to the nucleotide(s) affected, according to the HGVS notation.">
+				>
+				["at0060"] = <
+					text = <"Variant type">
+					description = <"The type of the observed variant">
+				>
+				["at0063"] = <
+					text = <"Genomic region">
+					description = <"Details about the specific position of the alteration">
+				>
+				["at0071"] = <
+					text = <"Quality">
+					description = <"Phred-scaled quality score for the assertion made in the Observed nucleotide(s)">
+				>
+				["at0072"] = <
+					text = <"Alternate">
+					description = <"A variant form of the same gene">
+				>
+				["at0081"] = <
+					text = <"Genotype characterization">
+					description = <"Genotype information">
+				>
+				["at0082"] = <
+					text = <"Genotype">
+					description = <"Combination of the allele with regards to the specific gene of interests, encoded as allele separated values (0 for the reference allele, 1 for the first allternate, etc.)">
+				>
+				["at0084"] = <
+					text = <"Genotype quality">
+					description = <"Genotype quality, encoded as a phred quality">
+				>
+				["at0085"] = <
+					text = <"Genotype probability">
+					description = <"">
+				>
+				["at0086"] = <
+					text = <"Allele depth">
+					description = <"The number of reads that support the reported allele">
+				>
+				["at0087"] = <
+					text = <"Total depth">
+					description = <"Total number of reads">
+				>
+				["at0093"] = <
+					text = <"Filtering">
+					description = <"Section to describe the filters (if any) that has been applied to the data">
+				>
+				["at0096"] = <
+					text = <"Genome assembly">
+					description = <"The specific version of the human sequence assembly used for annotation (NCBI or UCSC)">
+				>
+				["at0097"] = <
+					text = <"Filter passed">
+					description = <"Wheter or not the position has passed the applied filter.">
+				>
+				["at0104"] = <
+					text = <"Filter">
+					description = <"Filter's details">
+				>
+				["at0106"] = <
+					text = <"ID">
+					description = <"Identificative string">
+				>
+				["at0108"] = <
+					text = <"Description">
+					description = <"Description of how the filter works">
+				>
+				["at0110"] = <
+					text = <"Source name">
+					description = <"The name of the public data source that gives the variant identification">
+				>
+				["at0112"] = <
+					text = <"del">
+					description = <"deletion">
+				>
+				["at0113"] = <
+					text = <"dup">
+					description = <"duplication">
+				>
+				["at0114"] = <
+					text = <"ins">
+					description = <"insertion">
+				>
+				["at0115"] = <
+					text = <"inv">
+					description = <"inversion">
+				>
+				["at0116"] = <
+					text = <"sub">
+					description = <"substitution">
+				>
+				["at0117"] = <
+					text = <"indel">
+					description = <"insertion/deletion">
+				>
+				["at0118"] = <
+					text = <"rep">
+					description = <"repeated sequence">
+				>
+				["at0119"] = <
+					text = <"conv">
+					description = <"conversion">
+				>
+			>
+		>
+	>
